@@ -33,7 +33,7 @@ def hazard_rates_generation(hazard_rate_option, start=0.01, stop=1.0, hazard_set
 with col1:
     st.subheader('Input Values')
     Trials = st.number_input('Number of Trials', min_value=0,max_value=1000000,step=1,value=10)
-    p = st.number_input('Correlation (p)', min_value=0.0,max_value=1.0,step=0.01,value=0.5)
+    p = st.number_input('Probability of Default (p)', min_value=0.0,max_value=1.0,step=0.01,value=0.5)
     M = st.number_input('Market Factor (M)', min_value=-3.0,max_value=3.0,step=0.01,value=0.0)
     Z_values = norm.ppf(np.random.rand(Trials))
     hazard_rate_option = st.selectbox('Hazard Rate Array Options', options=['Random','Increasing','Set'])
@@ -49,7 +49,6 @@ with col1:
     elif hazard_rate_option == 'Set':
         Set_value = st.number_input('Set Value', min_value=0.0,max_value=0.99,step=0.01,value=0.2)
         hazard_rate = hazard_rates_generation(hazard_rate_option, hazard_set_value=Set_value)
-
 
 si = [1 - hr for hr in hazard_rate]
 
